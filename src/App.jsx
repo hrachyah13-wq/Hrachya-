@@ -17,7 +17,7 @@ export default function App() {
       <h1>My Dashboard</h1>
       <p>May 20, 2026</p>
       <ISSCard/>
-      <Artyom/>
+      <Hrachya/>
     </div>
 
   );
@@ -33,9 +33,9 @@ function ISSCard() {
   );
 }
 
-function Artyom() {
+function Hrachya() {
   return (
-    <div className="Artyom">
+    <div className="Hrachya-">
       <h2>Hello</h2>
       <p>Latitude: 42.36</p>
       <p>Longitude: -71.05</p>
