@@ -31,11 +31,11 @@ console.log(IssPosition.latitude);
 console.log(IssPosition.longitude);
 
 const asteroids = [
-
-    {name: "2024 AB1", diameter : 120, hazadours: false }
-    {name: "2024 CD2", diameter : 45, hazadours: true }
-     {name: "2024 EF3", diameter : 890, hazadours: false }
-    {name: "2024 GH4", diameter :23, hazadours: true };
+ 
+    {name: "2024 AB1", diameter :120, hazadours: false },
+    {name: "2024 CD2", diameter :45, hazadours: true },
+    {name: "2024 EF3", diameter :890, hazadours: false},
+    {name: "2024 GH4", diameter :23, hazadours: true },
 ]
 
 const names = asteroids.map(asteroid => asteroid.name)
@@ -48,6 +48,8 @@ const firstTwo =asteroids.slice (0,2)
 console.log(firstTwo)
 
 const hazardousNames = asteroids
- .filter(asteroid => asteroid.hazardous === true )
-  .map(asteroid.nameames)
+  .filter(asteroid => asteroid.hazardous === true )
+  .map(asteroid => asteroid.name)
   console.log(hazardousNames)
+
+  
