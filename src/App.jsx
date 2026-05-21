@@ -1,5 +1,15 @@
+import { useState } from 'react';
+
 import './App.css'
 
+function Counter (){
+  const [count,setCount] = useState(0)
+  return(
+    <button onClick={() => setCount(count + 1 )}>
+      Clicked {count} times 
+    </button>
+  )
+}
 
   // export default function App (){
   //  return(
@@ -11,6 +21,7 @@ import './App.css'
   // }
 
 // 
+
 
 export default function App() {
   return (
@@ -45,3 +56,26 @@ function Hrachya() {
 }
 
      
+
+
+function ISSTracker() {
+const [location, setLocation] = useState(null)
+
+useEffect(() => {
+fetch('https://api.wheretheiss.at/v1/satellites/25544')
+.then(r => r.json())
+.then(data => setLocation(data))
+}, [])
+return (
+<div className="card">
+<h2>ISS Position</h2>
+{location ? (
+<p>{location.latitude.toFixed(2)}°, {location.longitude.toFixed(2)}°</p>
+) : (
+<p>Loading...</p>
+)}
+</div>
+)
+}
+
+
