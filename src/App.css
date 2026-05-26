@@ -1,251 +1,3 @@
-body {
-  margin: 0;
-  background-color: #0b0c10;
-  font-family: 'Courier New', Courier, monospace;
-  color: #c5c6c7;
-}
-
-.dashboard-container {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: #121212;
-  border: 1px solid #1f2833;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.05);
-  border-radius: 8px;
-}
-
-.dashboard-header {
-  text-align: center;
-  border-bottom: 2px solid #1f2833;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-}
-
-.dashboard-header h1 {
-  color: #00ff00;
-  /* Կանաչ գույնը՝ ինչպես նկարում */
-  margin: 0 0 10px 0;
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-}
-
-.date-text {
-  color: #888;
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.dashboard-content {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 25px;
-}
-
-.card-section {
-  background-color: #1a1a1a;
-  border: 1px solid #333;
-  padding: 20px;
-  border-radius: 4px;
-  text-align: center;
-}
-
-.section-title {
-  color: #00ff00;
-  font-size: 1.2rem;
-  margin-top: 0;
-  margin-bottom: 15px;
-  letter-spacing: 1px;
-}
-
-.coordinates-box p {
-  font-size: 1.4rem;
-  margin: 10px 0;
-}
-
-.highlight {
-  color: #ffffff;
-  font-weight: bold;
-}
-
-.people-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 300px;
-  overflow-y: auto;
-  text-align: left;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.person-item {
-  padding: 8px 0;
-  border-bottom: 1px dashed #333;
-  font-size: 1.1rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-.person-name {
-  color: #ffffff;
-}
-
-.spacecraft-tag {
-  color: #00ff00;
-}
-
-.placeholder-card {
-  border: 1px dashed #444;
-  opacity: 0.5;
-}
-
-.placeholder-text {
-  font-style: italic;
-  color: #666;
-}
-
-body {
-margin: 0;
-background-color: #0b0c10;
-font-family: 'Courier New', Courier, monospace;
-color: #c5c6c7;
-}
-
-.dashboard-container {
-max-width: 900px;
-margin: 40px auto;
-padding: 20px;
-background-color: #121212;
-border: 1px solid #1f2833;
-box-shadow: 0 0 20px rgba(0, 255, 0, 0.05);
-border-radius: 8px;
-}
-
-.dashboard-header {
-text-align: center;
-border-bottom: 2px solid #1f2833;
-padding-bottom: 20px;
-margin-bottom: 30px;
-}
-
-.dashboard-header h1 {
-color: #00ff00;
-margin: 0 0 10px 0;
-font-size: 2.5rem;
-letter-spacing: 2px;
-}
-
-.date-text {
-color: #888;
-margin: 0;
-font-size: 1.1rem;
-}
-
-.dashboard-content {
-display: grid;
-grid-template-columns: 1fr;
-gap: 25px;
-}
-
-.card-section {
-background-color: #1a1a1a;
-border: 1px solid #333;
-padding: 20px;
-border-radius: 4px;
-text-align: center;
-}
-
-.section-title {
-color: #00ff00;
-font-size: 1.2rem;
-margin-top: 0;
-margin-bottom: 15px;
-letter-spacing: 1px;
-}
-
-.coordinates-box p {
-font-size: 1.4rem;
-margin: 10px 0;
-}
-
-.highlight {
-color: #ffffff;
-font-weight: bold;
-}
-
-.people-list, .asteroid-list {
-list-style: none;
-padding: 0;
-margin: 0;
-max-height: 300px;
-overflow-y: auto;
-text-align: left;
-max-width: 600px;
-margin: 0 auto;
-}
-
-.person-item, .asteroid-item {
-padding: 10px 0;
-border-bottom: 1px dashed #333;
-font-size: 1.1rem;
-display: flex;
-justify-content: space-between;
-align-items: center;
-}
-
-.person-name {
-color: #ffffff;
-}
-
-.spacecraft-tag {
-color: #00ff00;
-}
-
-/* Աստերոիդների համար նոր ոճեր */
-.asteroid-info {
-display: flex;
-flex-direction: column;
-gap: 4px;
-}
-
-.asteroid-name {
-color: #ffffff;
-font-weight: bold;
-}
-
-.asteroid-details {
-font-size: 0.9rem;
-color: #aaa;
-}
-
-.hazard-tag {
-padding: 4px 8px;
-border-radius: 4px;
-font-size: 0.85rem;
-font-weight: bold;
-}
-
-.hazard-tag.danger {
-background-color: rgba(255, 0, 0, 0.2);
-color: #ff4d4d;
-border: 1px solid #ff0000;
-}
-
-.hazard-tag.safe {
-background-color: rgba(0, 255, 0, 0.1);
-color: #00ff00;
-border: 1px solid #00ff00;
-}
-
-.placeholder-text {
-font-style: italic;
-color: #666;
-}
-
-
-
-
 /* Ընդհանուր Սթայլեր */
 body {
   margin: 0;
@@ -310,9 +62,9 @@ body {
   padding-bottom: 10px;
 }
 
-/* --- ԱՐԵԳԱԿՆԱՅԻՆ ՀԱՄԱԿԱՐԳԻ ՈՃԵՐԸ (ՆՈՐ) --- */
+/* --- ԱՐԵԳԱԿՆԱՅԻՆ ՀԱՄԱԿԱՐԳԻ ՈՃԵՐԸ --- */
 .solar-system-section {
-  grid-column: 1 / -1; /* Ցույց տալ ամբողջ լայնությամբ */
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -330,7 +82,6 @@ body {
   border-radius: 12px;
 }
 
-/* Արեգակ */
 .sun {
   position: absolute;
   width: 40px;
@@ -341,7 +92,6 @@ body {
   z-index: 10;
 }
 
-/* Ուղեծրերի ընդհանուր սթայլ */
 .orbit {
   position: absolute;
   border: 1px dashed rgba(148, 163, 184, 0.2);
@@ -351,28 +101,72 @@ body {
   align-items: center;
 }
 
-/* Մոլորակների ընդհանուր սթայլ */
 .planet {
   position: absolute;
   border-radius: 50%;
   top: 0;
 }
 
-/* Ուղեծրերի չափսեր և անիմացիայի արագություններ */
-.mercury-orbit { width: 80px; height: 80px; animation: spin 4s linear infinite; }
-.mercury { width: 6px; height: 6px; background: #94a3b8; }
+.mercury-orbit {
+  width: 80px;
+  height: 80px;
+  animation: spin 4s linear infinite;
+}
 
-.venus-orbit { width: 130px; height: 130px; animation: spin 7s linear infinite; }
-.venus { width: 10px; height: 10px; background: #fb923c; }
+.mercury {
+  width: 6px;
+  height: 6px;
+  background: #94a3b8;
+}
 
-.earth-orbit { width: 190px; height: 190px; animation: spin 10s linear infinite; }
-.earth { width: 12px; height: 12px; background: #38bdf8; box-shadow: 0 0 5px #38bdf8; }
+.venus-orbit {
+  width: 130px;
+  height: 130px;
+  animation: spin 7s linear infinite;
+}
 
-.mars-orbit { width: 240px; height: 240px; animation: spin 14s linear infinite; }
-.mars { width: 9px; height: 9px; background: #f87171; }
+.venus {
+  width: 10px;
+  height: 10px;
+  background: #fb923c;
+}
 
-.jupiter-orbit { width: 310px; height: 310px; animation: spin 25s linear infinite; }
-.jupiter { width: 22px; height: 22px; background: #fbbf24; }
+.earth-orbit {
+  width: 190px;
+  height: 190px;
+  animation: spin 10s linear infinite;
+}
+
+.earth {
+  width: 12px;
+  height: 12px;
+  background: #38bdf8;
+  box-shadow: 0 0 5px #38bdf8;
+}
+
+.mars-orbit {
+  width: 240px;
+  height: 240px;
+  animation: spin 14s linear infinite;
+}
+
+.mars {
+  width: 9px;
+  height: 9px;
+  background: #f87171;
+}
+
+.jupiter-orbit {
+  width: 310px;
+  height: 310px;
+  animation: spin 25s linear infinite;
+}
+
+.jupiter {
+  width: 22px;
+  height: 22px;
+  background: #fbbf24;
+}
 
 .system-tip {
   color: #64748b;
@@ -380,10 +174,14 @@ body {
   margin-top: 15px;
 }
 
-/* Պտտվելու անիմացիա */
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* --- ՄՏՀ Դիրքի Ոճեր --- */
@@ -401,7 +199,8 @@ body {
 }
 
 /* --- Տիեզերագնացների Ցուցակ --- */
-.people-list, .asteroid-list {
+.people-list,
+.asteroid-list {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -409,7 +208,8 @@ body {
   overflow-y: auto;
 }
 
-.person-item, .asteroid-item {
+.person-item,
+.asteroid-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -471,28 +271,11 @@ body {
   font-style: italic;
 }
 
-/* Վահանակի հիմնական բլոկը */
+/* --- Տիեզերանավի Վահանակ --- */
 .spaceship-dashboard {
-  background-color: #0b132b;
-  color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  border: 2px solid #00b4d8;
-  box-shadow: 0 0 15px rgba(0, 180, 216, 0.3);
   font-family: 'Courier New', Courier, monospace;
-  max-width: 400px;
-  margin: 20px auto;
 }
 
-.dashboard-title {
-  text-align: center;
-  color: #00b4d8;
-  margin-top: 0;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
-}
-
-/* Ցուցանիշների ցանցը */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -500,7 +283,6 @@ body {
   margin-top: 20px;
 }
 
-/* Առանձին քարտերը */
 .stat-card {
   background-color: #1c2541;
   padding: 15px;
@@ -523,16 +305,6 @@ body {
   font-weight: bold;
 }
 
-/* Գույներ ըստ ցուցանիշի */
-.stat-value.speed {
-  color: #ffb703;
-}
-
-.stat-value.pressure {
-  color: #ee9b00;
-}
-
-/* Համակարգի կարգավիճակ */
 .system-status {
   display: flex;
   align-items: center;
@@ -551,7 +323,6 @@ body {
   box-shadow: 0 0 8px #390;
 }
 
-/* Թարթող լույսի էֆեկտ */
 .blinking {
   animation: blinker 1.5s linear infinite;
 }
