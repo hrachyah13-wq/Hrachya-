@@ -1,126 +1,170 @@
 import { useState, useEffect } from 'react';
+import './App.css';
 
-import './App.css'
+function App() {
+  const [issPosition, setIssPosition] = useState({ latitude: '00.00', longitude: '00.00' });
+  const [people, setPeople] = useState([]);
+  const [loadingPeople, setLoadingPeople] = useState(true);
+  const [asteroids, setAsteroids] = useState([]);
+  const [loadingAsteroids, setLoadingAsteroids] = useState(true);
+  const [speed, setSpeed] = useState(28000); // կմ/ժ
+  const [pressure, setPressure] = useState(101.3); // կՊա (kPa)
 
-function Counter (){
-  const [count,setCount] = useState(0)
-  return(
-    <button onClick={() => setCount(count + 1 )}>
-      Clicked {count} times 
-    </button>
-  )
-}
+  // 1. Ստանում ենք ՄՏՀ (ISS) դիրքը
+  const fetchIssPosition = async () => {
+    try {
+      const response = await fetch('http://api.open-notify.org/iss-now.json');
+      const data = await response.json();
 
-      // export default function App (){
-      //  return(
-        //    <div className="dashboard">
-      //     <h1>My dashboard</h1>
-      //    <p> May 20,2026 </p>
-      //   </div> 
-      //  )
-  // }
+      if (data.message === 'success') {
+        setIssPosition({
+          latitude: parseFloat(data.iss_position.latitude).toFixed(4),
+          longitude: parseFloat(data.iss_position.longitude).toFixed(4),
+        });
+      }
+    } catch (error) {
+      console.error("ISS դիրքի ստացման սխալ՝", error);
+    }
+  };
 
-// 
+  // 2. Ստանում ենք տիեզերագնացների տվյալները
+  const fetchPeopleInSpace = async () => {
+    try {
+      const response = await fetch('http://api.open-notify.org/astros.json');
+      const data = await response.json();
 
+      if (data.message === 'success') {
+        setPeople(data.people);
+      }
+      setLoadingPeople(false);
+    } catch (error) {
+      console.error("Տիեզերագնացների տվյալների ստացման սխալ՝", error);
+      setLoadingPeople(false);
+    }
+  };
 
-export default function App() {
-  return (
-    <div className="dashboard">
-      <h1>My Dashboard</h1>
-      <p>May 20, 2026</p>
-      <ISSCard/>
-      <Hrachya/>
-      <ISSTracker/>
-      <PeopleInSpace/>
-      <SolarSystem/>
-    </div>
-
-  );
-}
-
-function ISSCard() {
-  return (
-    <div className="card">
-      <h2>ISS Position</h2>
-      <p>Latitude: 42.36</p>
-      <p>Longitude: -71.05</p>
-    </div>
-  );
-}
-
-function Hrachya() {
-  return (
-    <div className="Hrachya-">
-      <h2>Hello</h2>
-      <p>Latitude: 42.36</p>
-      <p>Longitude: -71.05</p>
-    </div>
-  );
-}
-
+  // 3. Ստանում ենք աստերոիդների տվյալները NASA API-ից
+  const fetchAsteroids = async () => {
+    try {
+      // Ճիշտ ձևաչափով տեղական ամսաթիվը (YYYY-MM-DD)
+      const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+      const today = (new Date(Date.now() - tzoffset)).toISOString().split('T')[0];
      
+      const response = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${today}&api_key=${import.meta.env.VITE_NASA_KEY}`);
+      const data = await response.json();
 
+      if (data.near_earth_objects && data.near_earth_objects[today]) {
+        setAsteroids(data.near_earth_objects[today]);
+      }
+      setLoadingAsteroids(false);
+    } catch (error) {
+      console.error("Աստերոիդների տվյալների ստացման սխալ՝", error);
+      setLoadingAsteroids(false);
+    }
+  };
 
-function ISSTracker() {
-  const [location, setLocation] = useState(null)
   useEffect(() => {
-    fetch('https://api.wheretheiss.at/v1/satellites/25544')
-    .then(r => r.json())
-    .then(data => setLocation(data))
-}, [])
-return (
-<div className="card">
-<h2>ISS Position</h2>
-{location ? (
-<p>{location.latitude.toFixed(2)}°, {location.longitude.toFixed(2)}°</p>
-) : (
-<p>Loading...</p>
-)}
-</div>
-)
+    fetchIssPosition();
+    fetchPeopleInSpace();
+    fetchAsteroids();
+
+    const interval = setInterval(fetchIssPosition, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSpeed(prevSpeed => {
+        const change = (Math.random() - 0.5) * 300;
+        const newSpeed = prevSpeed + change;
+        return Math.max(25000, Math.min(35000, Math.round(newSpeed)));
+      });
+
+      setPressure(prevPressure => {
+        const change = (Math.random() - 0.5) * 1;
+        const newPressure = prevPressure + change;
+        return Math.max(95, Math.min(105, parseFloat(newPressure.toFixed(2))));
+      });
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+  const currentDate = new Date().toLocaleDateString('hy-AM', options);
+
+  return (
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1>Տիեզերական Վահանակ</h1>
+        <p className="date-text">{currentDate}</p>
+      </header>
+
+      <main className="dashboard-content">
+       
+        {/* Արեգակնային համակարգ */}
+        <section className="card-section solar-system-section">
+          <h2 className="section-title">ԱՐԵԳԱԿՆԱՅԻՆ ՀԱՄԱԿԱՐԳ</h2>
+          <div className="solar-system-container">
+            <div className="sun"></div>
+            <div className="orbit mercury-orbit"><div className="planet mercury"></div></div>
+            <div className="orbit venus-orbit"><div className="planet venus"></div></div>
+            <div className="orbit earth-orbit"><div className="planet earth"></div></div>
+            <div className="orbit mars-orbit"><div className="planet mars"></div></div>
+            <div className="orbit jupiter-orbit"><div className="planet jupiter"></div></div>
+          </div>
+          <p className="system-tip">Մոլորակները պտտվում են իրենց իրական արագությունների համամասնությամբ։</p>
+        </section>
+
+        {/* Տիեզերանավի համակարգի ցուցանիշներ (Արագություն և Ճնշում) */}
+        <section className="card-section spaceship-dashboard">
+          <h2 className="section-title">ՏԻԵԶԵՐԱՆԱՎԻ ՀԱՄԱԿԱՐԳ</h2>
+          <div className="stats-grid">
+            <div className="stat-card">
+              <span className="stat-label">Արագություն: </span>
+              <span className="stat-value speed highlight">{speed.toLocaleString()} կմ/ժ</span>
+            </div>
+            <div className="stat-card">
+              <span className="stat-label">Ճնշում: </span>
+              <span className="stat-value pressure highlight">{pressure} կՊա</span>
+            </div>
+          </div>
+          <div className="system-status">
+            <span className="status-dot blinking"></span>
+            <span className="status-text"> Համակարգը կայուն է</span>
+          </div>
+        </section>
+
+        {/* ՄՏՀ Դիրքը */}
+        <section className="card-section">
+          <h2 className="section-title">ՄՏՀ ԴԻՐՔԸ (ISS)</h2>
+          <div className="coordinates-box">
+            <p>Լայնություն: <span className="highlight">{issPosition.latitude}°</span></p>
+            <p>Երկայնություն: <span className="highlight">{issPosition.longitude}°</span></p>
+          </div>
+        </section>
+
+        {/* Մարդիկ տիեզերքում */}
+        <section className="card-section">
+          <h2 className="section-title">ՄԱՐԴԻԿ ՏԻԵԶԵՐՔՈՒՄ</h2>
+          {loadingPeople ? (
+            <p className="loading-text">Բեռնվում է...</p>
+          ) : (
+            <ul className="people-list">
+              {people.map((person, index) => (
+                <li key={index} className="person-item">
+                  <span className="person-name">{person.name}</span>
+                  <span className="spacecraft-tag">{person.craft}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        {/* Աստերոիդներ */}
+      </main>
+    </div>
+  );
 }
 
-
-
-
-
-function PeopleInSpace() {
-  const [people, setPeople] = useState(null);
-
-useEffect(() => {
-fetch('http://api.open-notify.org/astros.json')
-.then(r => r.json())
-.then(data => setPeople(data.people));
-}, []);
-return (
-   <div className="card">
-     <h2>People in Space</h2>
-    { people ? (
-<ul>
-{ people.map(person => (
-   <li key={person.name}>
- {person.name} - {person.craft}
-   </li>  
-   ))}
-   </ul>
-   ) : (
-    <p>Loading...</p>
-    )}
-    </div>
-    );
-   }
-
-
-function SolarSystem() {
-  return (
-    <iframe
-      src="https://eyes.nasa.gov/apps/solar-system/#/sc_osiris_rex?rate=1814400&time=2021-02-17T21:06:45.412+00:00"
-      title="NASA"
-      style={{
-        width: "100%",
-        height: "100vh",
-        border: "none"
-      }}
-    />
-  )
-} 
+export default App;
